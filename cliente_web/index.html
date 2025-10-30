@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Inventario – Cliente Web SOAP</title>
+<style>
+  :root{
+    --bg:#0f172a;           /* slate-900 */
+    --card:#111827e6;       /* slate-900 alpha */
+    --muted:#94a3b8;        /* slate-400 */
+    --text:#e5e7eb;         /* slate-200 */
+    --primary:#7c3aed;      /* violet-600 */
+    --primary-2:#8b5cf6;    /* violet-500 */
+    --success:#10b981;
+    --danger:#ef4444;
+    --warning:#f59e0b;
+    --border:#263046;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; font-family: Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
+    background:
+      radial-gradient(1200px 600px at 10% 0%, #1f2937 0%, transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, #312e81 0%, transparent 55%),
+      radial-gradient(600px 600px at 50% 100%, #0b1020 0%, transparent 60%),
+      var(--bg);
+    color:var(--text);
+    min-height:100svh; padding:32px;
+  }
+  .container{max-width:1100px;margin:0 auto}
+  .navbar{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:16px;margin-bottom:24px;
+  }
+  .brand{
+    display:flex;align-items:center;gap:12px;
+  }
+  .logo{
+    width:42px;height:42px;border-radius:12px;
+    background: linear-gradient(135deg, var(--primary), #4f46e5);
+    display:grid;place-items:center; font-weight:700;
+    box-shadow:0 10px 30px #4f46e566;
+  }
+  .brand h1{margin:0;font-size:20px;letter-spacing:.3px}
+  .actions{display:flex;gap:10px;flex-wrap:wrap}
+  .btn{
+    appearance:none;border:none;border-radius:10px;cursor:pointer;
+    padding:10px 14px;font-weight:600;color:#fff;background:var(--primary);
+    transition:.2s transform,.2s background,.2s box-shadow;
+    box-shadow:0 6px 20px #7c3aed33;
+  }
+  .btn:hover{background:var(--primary-2); transform:translateY(-1px)}
+  .btn.secondary{background:#1f2937;color:#d1d5db;border:1px solid var(--border);box-shadow:none}
+  .btn.ghost{background:transparent;border:1px solid var(--border);color:#cbd5e1}
+  .card{
+    background:linear-gradient(180deg,#0b1326cc,#0b1326b3);
+    border:1px solid var(--border);
+    border-radius:16px; padding:18px 18px 10px;
+    box-shadow:0 10px 40px #00000066;
+  }
+  .toolbar{
+    display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:6px 0 14px;
+  }
+  .input{
+    background:#0f172a;border:1px solid var(--border);color:var(--text);
+    border-radius:10px;padding:10px 12px;outline:none;min-width:240px;
+  }
+  .muted{color:var(--muted);font-size:13px}
+  .table-wrap{overflow:auto;border-radius:12px;border:1px solid var(--border)}
+  table{width:100%;border-collapse:collapse;min-width:840px;background:#0a1224}
+  thead th{
+    text-align:left;background:#111827;border-bottom:1px solid var(--border);
+    color:#cbd5e1;font-size:13px;font-weight:700;letter-spacing:.3px;
+    padding:12px 14px;position:sticky;top:0;z-index:1;
+  }
+  tbody td{
+    border-bottom:1px solid #1f2937;padding:12px 14px;font-size:14.5px;color:#e2e8f0;
+  }
+  tbody tr:hover{background:#0e1833}
+  .badge{padding:4px 8px;border-radius:999px;font-size:12px;font-weight:700}
+  .badge.ok{background:#065f46;color:#d1fae5}
+  .badge.low{background:#7c2d12;color:#ffedd5}
+  .footer{
+    margin-top:10px; display:flex;justify-content:space-between;align-items:center;color:#aab0bd;font-size:12px;
+  }
+  /* Modal */
+  .modal-backdrop{
+    position:fixed;inset:0;background:#0008;display:none;place-items:center;z-index:50;
+  }
+  .modal{background:#0b1326;border:1px solid var(--border);border-radius:16px;padding:18px;max-width:640px;width:100%}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .grid .span-2{grid-column:span 2}
+  label{font-size:12px;color:#cbd5e1;margin-bottom:6px;display:block}
+  .field{display:flex;flex-direction:column}
+  .toast{
+    position:fixed;right:18px;bottom:18px;background:#0b1326;border:1px solid var(--border);
+    padding:12px 14px;border-radius:12px;box-shadow:0 10px 35px #0008;display:none;z-index:60
+  }
+  .toast.ok{border-color:#064e3b}
+  .toast.err{border-color:#7f1d1d}
+  .loader{display:none;margin-left:8px;border:3px solid #334155;border-top-color:#e5e7eb;border-radius:50%;width:18px;height:18px;animation:spin 1s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;background:#0b1222;border:1px solid var(--border);border-radius:6px;padding:2px 6px}
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="navbar">
+      <div class="brand">
+        <div class="logo">IV</div>
+        <div>
+          <h1>Inventario – Cliente Web SOAP</h1>
+          <div class="muted">N-Capas · SOAP · PostgreSQL · Interoperabilidad</div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn" id="btnList"><span>📋</span> Listar</button>
+        <button class="btn secondary" id="btnNew"><span>➕</span> Nuevo</button>
+        <button class="btn ghost" id="btnReload"><span>🔄</span> Refrescar</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="toolbar">
+        <input id="q" class="input" placeholder="Filtrar por código o nombre…" />
+        <span class="muted">Servidor: <span class="kbd" id="srv">http://localhost:5000/soap/inventario.asmx</span></span>
+        <span id="loader" class="loader"></span>
+      </div>
+
+      <div class="table-wrap" id="tableWrap">
+        <table id="tbl">
+          <thead>
+            <tr>
+              <th style="width:80px">ID</th>
+              <th style="width:120px">Código</th>
+              <th>Nombre</th>
+              <th style="width:120px">P. Compra</th>
+              <th style="width:120px">P. Venta</th>
+              <th style="width:100px">Stock</th>
+              <th style="width:100px">Mín.</th>
+              <th style="width:120px">Estado</th>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+            <tr><td colspan="8" class="muted">Sin datos. Pulsa <b>Listar</b>.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="footer">
+        <div id="meta" class="muted">0 artículos</div>
+        <div class="muted">© ESPE · APLICACIONES DISTRIBUIDAS</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Nuevo -->
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="titleModal">
+      <h2 id="titleModal" style="margin:0 0 8px 0">Nuevo artículo</h2>
+      <div class="muted" style="margin-bottom:14px">El <b>código</b> se sugiere automáticamente (COD-###). Puedes editarlo.</div>
+      <div class="grid">
+        <div class="field">
+          <label>Código</label>
+          <input id="fCodigo" class="input" placeholder="COD-001" />
+        </div>
+        <div class="field">
+          <label>Nombre</label>
+          <input id="fNombre" class="input" placeholder="Martillo carpintero" />
+        </div>
+        <div class="field">
+          <label>Categoría Id</label>
+          <input id="fCat" class="input" type="number" value="1" min="1" />
+        </div>
+        <div class="field">
+          <label>Proveedor Id (vacío = ninguno)</label>
+          <input id="fProv" class="input" type="number" min="0" placeholder="1" />
+        </div>
+        <div class="field">
+          <label>Precio Compra</label>
+          <input id="fPc" class="input" type="number" step="0.01" value="5.50" min="0" />
+        </div>
+        <div class="field">
+          <label>Precio Venta (≥ compra)</label>
+          <input id="fPv" class="input" type="number" step="0.01" value="8.99" min="0" />
+        </div>
+        <div class="field">
+          <label>Stock</label>
+          <input id="fStock" class="input" type="number" value="20" min="0" />
+        </div>
+        <div class="field">
+          <label>Stock Mínimo</label>
+          <input id="fMin" class="input" type="number" value="5" min="0" />
+        </div>
+        <div class="span-2" style="display:flex;gap:10px;justify-content:flex-end;margin-top:4px">
+          <button class="btn secondary" id="btnClose">Cancelar</button>
+          <button class="btn" id="btnSave">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+<script>
+/* ==================== Config SOAP ==================== */
+const SERVICE_URL   = "http://localhost:5000/soap/inventario.asmx";
+const ACTION_LIST   = "http://tempuri.org/IInventarioSoap/ListarArticulos";
+const ACTION_GET    = "http://tempuri.org/IInventarioSoap/ConsultarArticuloPorCodigo";
+const ACTION_INSERT = "http://tempuri.org/IInventarioSoap/InsertarArticulo";
+const DCNS          = "http://schemas.datacontract.org/2004/07/Inventory.Domain.Soap";
+
+const $ = (id) => document.getElementById(id);
+const state = { rows: [] };
+
+/* ==================== UI helpers ==================== */
+function showToast(msg, ok=true){
+  const t = $('toast');
+  t.textContent = msg;
+  t.className = 'toast ' + (ok ? 'ok' : 'err');
+  t.style.display = 'block';
+  setTimeout(()=> t.style.display = 'none', 3200);
+}
+function showModal(open){
+  $('modalBackdrop').style.display = open ? 'grid' : 'none';
+}
+function setLoading(on){
+  $('loader').style.display = on ? 'inline-block' : 'none';
+}
+
+/* ==================== SOAP core ==================== */
+async function callSoap(action, envelope){
+  const res = await fetch(SERVICE_URL, {
+    method:'POST',
+    headers:{
+      'Content-Type':'text/xml; charset=utf-8',
+      'SOAPAction': action
+    },
+    body: envelope
+  });
+  const text = await res.text();
+  if (!res.ok) {
+    const fault = tryExtractFault(text);
+    throw new Error(fault || `HTTP ${res.status}`);
+  }
+  return text;
+}
+function tryExtractFault(xmlText){
+  try{
+    const xml = new DOMParser().parseFromString(xmlText, 'text/xml');
+    const fs = xml.getElementsByTagName('faultstring')[0];
+    return fs?.textContent?.trim() || null;
+  }catch{ return null; }
+}
+
+/* ==================== Listar ==================== */
+async function listar(limit = 200){
+  setLoading(true);
+  try{
+    const envelope = `
+    <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+      <s:Body>
+        <ListarArticulos xmlns="http://tempuri.org/">
+          <limit>${limit}</limit>
+        </ListarArticulos>
+      </s:Body>
+    </s:Envelope>`;
+    const xmlText = await callSoap(ACTION_LIST, envelope);
+    const xml = new DOMParser().parseFromString(xmlText,'text/xml');
+    const nodes = xml.getElementsByTagNameNS('*','ArticuloSoap');
+    const rows = [];
+    for (let i=0;i<nodes.length;i++){
+      const n = nodes[i];
+      const g = tag => n.getElementsByTagNameNS('*',tag)[0]?.textContent || '';
+      rows.push({
+        Id: +g('Id'),
+        Codigo: g('Codigo'),
+        Nombre: g('Nombre'),
+        PrecioCompra: +(g('PrecioCompra') || 0),
+        PrecioVenta:  +(g('PrecioVenta')  || 0),
+        Stock: +(g('Stock')||0),
+        StockMin: +(g('StockMin')||0)
+      });
+    }
+    state.rows = rows.sort((a,b)=> a.Id-b.Id);
+    renderTable();
+    showToast(`Se cargaron ${rows.length} artículos`, true);
+  }catch(err){
+    showToast(err.message || 'Error al listar', false);
+  }finally{
+    setLoading(false);
+  }
+}
+function renderTable(){
+  const q = ($('q').value || '').trim().toLowerCase();
+  const rows = state.rows.filter(r =>
+    r.Codigo.toLowerCase().includes(q) || r.Nombre.toLowerCase().includes(q)
+  );
+  $('meta').textContent = `${rows.length} artículos`;
+  const tbody = $('tbody');
+  if (!rows.length){
+    tbody.innerHTML = `<tr><td colspan="8" class="muted">Sin resultados.</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = rows.map(r=>{
+    const ok = r.Stock >= r.StockMin;
+    return `
+      <tr>
+        <td>${r.Id}</td>
+        <td><span class="kbd">${r.Codigo}</span></td>
+        <td>${escapeHtml(r.Nombre)}</td>
+        <td>${fmt(r.PrecioCompra)}</td>
+        <td>${fmt(r.PrecioVenta)}</td>
+        <td>${r.Stock}</td>
+        <td>${r.StockMin}</td>
+        <td><span class="badge ${ok?'ok':'low'}">${ok?'OK':'BAJO'}</span></td>
+      </tr>
+    `;
+  }).join('');
+}
+function fmt(n){ return new Intl.NumberFormat('es-EC',{minimumFractionDigits:2,maximumFractionDigits:2}).format(n); }
+function escapeHtml(s){ return s.replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])); }
+
+/* ==================== Insertar ==================== */
+async function sugerirCodigo(){
+  // Genera siguiente COD-### a partir de los ya listados
+  const max = state.rows
+    .map(r => (r.Codigo.match(/^COD-(\d{3,})$/)?.[1]) ?? null)
+    .filter(Boolean).map(Number)
+    .reduce((a,b)=>Math.max(a,b), 0);
+  const next = (max+1).toString().padStart(3,'0');
+  return `COD-${next}`;
+}
+async function abrirNuevo(){
+  if (!state.rows.length) await listar(200);
+  $('fCodigo').value = await sugerirCodigo();
+  $('fNombre').value = 'Martillo carpintero';
+  $('fCat').value = 1;
+  $('fProv').value = '';
+  $('fPc').value = 5.50;
+  $('fPv').value = 8.99;
+  $('fStock').value = 20;
+  $('fMin').value = 5;
+  showModal(true);
+}
+async function guardarNuevo(){
+  const codigo = ($('fCodigo').value||'').trim().toUpperCase();
+  const nombre = ($('fNombre').value||'').trim();
+  const cat    = +$('fCat').value;
+  const provRaw= $('fProv').value.trim();
+  const prov   = provRaw === '' ? null : Math.max(0, +provRaw);
+  const pc     = +$('fPc').value;
+  const pv     = +$('fPv').value;
+  const st     = +$('fStock').value;
+  const stMin  = +$('fMin').value;
+
+  if (!/^COD-\d{3,}$/.test(codigo)) return showToast('Código inválido. Use formato COD-###', false);
+  if (!nombre) return showToast('Nombre es requerido', false);
+  if (pv < pc) return showToast('Precio venta debe ser ≥ compra', false);
+
+  const provXml = (prov===null || prov===0)
+    ? `<d:ProveedorId i:nil="true" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" />`
+    : `<d:ProveedorId>${prov}</d:ProveedorId>`;
+
+  const envelope = `<?xml version="1.0" encoding="utf-8"?>
+  <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+    <s:Body>
+      <InsertarArticulo xmlns="http://tempuri.org/">
+        <input xmlns:d="${DCNS}">
+          <d:Codigo>${escapeXml(codigo)}</d:Codigo>
+          <d:Nombre>${escapeXml(nombre)}</d:Nombre>
+          <d:CategoriaId>${cat}</d:CategoriaId>
+          ${provXml}
+          <d:PrecioCompra>${pc.toString().replace(',', '.')}</d:PrecioCompra>
+          <d:PrecioVenta>${pv.toString().replace(',', '.')}</d:PrecioVenta>
+          <d:Stock>${st}</d:Stock>
+          <d:StockMin>${stMin}</d:StockMin>
+        </input>
+      </InsertarArticulo>
+    </s:Body>
+  </s:Envelope>`;
+
+  setLoading(true);
+  try{
+    await callSoap(ACTION_INSERT, envelope);
+    showToast('Artículo insertado', true);
+    showModal(false);
+    await listar(200);
+  }catch(err){
+    showToast(err.message || 'Error al insertar', false);
+  }finally{
+    setLoading(false);
+  }
+}
+
+/* ==================== Utils ==================== */
+function escapeXml(s){ return s.replace(/[<>&'"]/g, c=>({ '<':'&lt;','>':'&gt;','&':'&amp;',"'":'&apos;','"':'&quot;' }[c])); }
+
+/* ==================== Events ==================== */
+$('srv').textContent = SERVICE_URL;
+$('btnList').addEventListener('click', ()=> listar(200));
+$('btnReload').addEventListener('click', ()=> listar(200));
+$('btnNew').addEventListener('click', abrirNuevo);
+$('btnClose').addEventListener('click', ()=> showModal(false));
+$('btnSave').addEventListener('click', guardarNuevo);
+$('q').addEventListener('input', renderTable);
+
+// Autocarga inicial
+listar(200);
+</script>
+</body>
+</html>

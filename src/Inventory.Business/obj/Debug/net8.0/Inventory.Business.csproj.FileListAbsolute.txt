@@ -1,0 +1,17 @@
+D:\ESPE\APLICACION DISTRIBUIDAS\SOA\inventory-ncapas\src\Inventory.Business\bin\Debug\net8.0\Inventory.Business.deps.json
+D:\ESPE\APLICACION DISTRIBUIDAS\SOA\inventory-ncapas\src\Inventory.Business\bin\Debug\net8.0\Inventory.Business.dll
+D:\ESPE\APLICACION DISTRIBUIDAS\SOA\inventory-ncapas\src\Inventory.Business\bin\Debug\net8.0\Inventory.Business.pdb
+D:\ESPE\APLICACION DISTRIBUIDAS\SOA\inventory-ncapas\src\Inventory.Business\bin\Debug\net8.0\Inventory.Data.dll
+D:\ESPE\APLICACION DISTRIBUIDAS\SOA\inventory-ncapas\src\Inventory.Business\bin\Debug\net8.0\Inventory.Domain.dll
+D:\ESPE\APLICACION DISTRIBUIDAS\SOA\inventory-ncapas\src\Inventory.Business\bin\Debug\net8.0\Inventory.Domain.pdb
+D:\ESPE\APLICACION DISTRIBUIDAS\SOA\inventory-ncapas\src\Inventory.Business\bin\Debug\net8.0\Inventory.Data.pdb
+D:\ESPE\APLICACION DISTRIBUIDAS\SOA\inventory-ncapas\src\Inventory.Business\obj\Debug\net8.0\Inventory.Business.csproj.AssemblyReference.cache
+D:\ESPE\APLICACION DISTRIBUIDAS\SOA\inventory-ncapas\src\Inventory.Business\obj\Debug\net8.0\Inventory.Business.GeneratedMSBuildEditorConfig.editorconfig
+D:\ESPE\APLICACION DISTRIBUIDAS\SOA\inventory-ncapas\src\Inventory.Business\obj\Debug\net8.0\Inventory.Business.AssemblyInfoInputs.cache
+D:\ESPE\APLICACION DISTRIBUIDAS\SOA\inventory-ncapas\src\Inventory.Business\obj\Debug\net8.0\Inventory.Business.AssemblyInfo.cs
+D:\ESPE\APLICACION DISTRIBUIDAS\SOA\inventory-ncapas\src\Inventory.Business\obj\Debug\net8.0\Inventory.Business.csproj.CoreCompileInputs.cache
+D:\ESPE\APLICACION DISTRIBUIDAS\SOA\inventory-ncapas\src\Inventory.Business\obj\Debug\net8.0\Inventor.09A16F92.Up2Date
+D:\ESPE\APLICACION DISTRIBUIDAS\SOA\inventory-ncapas\src\Inventory.Business\obj\Debug\net8.0\Inventory.Business.dll
+D:\ESPE\APLICACION DISTRIBUIDAS\SOA\inventory-ncapas\src\Inventory.Business\obj\Debug\net8.0\refint\Inventory.Business.dll
+D:\ESPE\APLICACION DISTRIBUIDAS\SOA\inventory-ncapas\src\Inventory.Business\obj\Debug\net8.0\Inventory.Business.pdb
+D:\ESPE\APLICACION DISTRIBUIDAS\SOA\inventory-ncapas\src\Inventory.Business\obj\Debug\net8.0\ref\Inventory.Business.dll

@@ -1,0 +1,219 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\ESPE\\APLICACION DISTRIBUIDAS\\SOA\\inventory-ncapas\\src\\Inventory.Business\\Inventory.Business.csproj": {}
+  },
+  "projects": {
+    "D:\\ESPE\\APLICACION DISTRIBUIDAS\\SOA\\inventory-ncapas\\src\\Inventory.Business\\Inventory.Business.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\ESPE\\APLICACION DISTRIBUIDAS\\SOA\\inventory-ncapas\\src\\Inventory.Business\\Inventory.Business.csproj",
+        "projectName": "Inventory.Business",
+        "projectPath": "D:\\ESPE\\APLICACION DISTRIBUIDAS\\SOA\\inventory-ncapas\\src\\Inventory.Business\\Inventory.Business.csproj",
+        "packagesPath": "C:\\Users\\bigtu\\.nuget\\packages\\",
+        "outputPath": "D:\\ESPE\\APLICACION DISTRIBUIDAS\\SOA\\inventory-ncapas\\src\\Inventory.Business\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\bigtu\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "D:\\ESPE\\APLICACION DISTRIBUIDAS\\SOA\\inventory-ncapas\\src\\Inventory.Data\\Inventory.Data.csproj": {
+                "projectPath": "D:\\ESPE\\APLICACION DISTRIBUIDAS\\SOA\\inventory-ncapas\\src\\Inventory.Data\\Inventory.Data.csproj"
+              },
+              "D:\\ESPE\\APLICACION DISTRIBUIDAS\\SOA\\inventory-ncapas\\src\\Inventory.Domain\\Inventory.Domain.csproj": {
+                "projectPath": "D:\\ESPE\\APLICACION DISTRIBUIDAS\\SOA\\inventory-ncapas\\src\\Inventory.Domain\\Inventory.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[12.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.415/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\ESPE\\APLICACION DISTRIBUIDAS\\SOA\\inventory-ncapas\\src\\Inventory.Data\\Inventory.Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\ESPE\\APLICACION DISTRIBUIDAS\\SOA\\inventory-ncapas\\src\\Inventory.Data\\Inventory.Data.csproj",
+        "projectName": "Inventory.Data",
+        "projectPath": "D:\\ESPE\\APLICACION DISTRIBUIDAS\\SOA\\inventory-ncapas\\src\\Inventory.Data\\Inventory.Data.csproj",
+        "packagesPath": "C:\\Users\\bigtu\\.nuget\\packages\\",
+        "outputPath": "D:\\ESPE\\APLICACION DISTRIBUIDAS\\SOA\\inventory-ncapas\\src\\Inventory.Data\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\bigtu\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "D:\\ESPE\\APLICACION DISTRIBUIDAS\\SOA\\inventory-ncapas\\src\\Inventory.Domain\\Inventory.Domain.csproj": {
+                "projectPath": "D:\\ESPE\\APLICACION DISTRIBUIDAS\\SOA\\inventory-ncapas\\src\\Inventory.Domain\\Inventory.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.1.66, )"
+            },
+            "Npgsql": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.415/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\ESPE\\APLICACION DISTRIBUIDAS\\SOA\\inventory-ncapas\\src\\Inventory.Domain\\Inventory.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\ESPE\\APLICACION DISTRIBUIDAS\\SOA\\inventory-ncapas\\src\\Inventory.Domain\\Inventory.Domain.csproj",
+        "projectName": "Inventory.Domain",
+        "projectPath": "D:\\ESPE\\APLICACION DISTRIBUIDAS\\SOA\\inventory-ncapas\\src\\Inventory.Domain\\Inventory.Domain.csproj",
+        "packagesPath": "C:\\Users\\bigtu\\.nuget\\packages\\",
+        "outputPath": "D:\\ESPE\\APLICACION DISTRIBUIDAS\\SOA\\inventory-ncapas\\src\\Inventory.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\bigtu\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "System.Runtime.Serialization.Primitives": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.ServiceModel.Primitives": {
+              "target": "Package",
+              "version": "[8.1.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.415/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

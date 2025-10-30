@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "qSBDKa59gm0y87TQKoGBNUzp9RiLkKc7nV/BvIs3yu4=",
+  "Source": "Inventory.SOAP",
+  "BasePath": "_content/Inventory.SOAP",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
