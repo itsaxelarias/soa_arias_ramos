@@ -13,10 +13,12 @@ namespace Inventory.ServiceHost.Soap
     public class InventarioSoapService : IInventarioSoap
     {
         private readonly IInventarioService _svc;
+        private readonly IArticuloRepository _repo;
 
-        public InventarioSoapService(IInventarioService svc)
+        public InventarioSoapService(IInventarioService svc, IArticuloRepository repo)
         {
             _svc = svc ?? throw new ArgumentNullException(nameof(svc));
+            _repo = repo ?? throw new ArgumentNullException(nameof(repo));
         }
 
         public ArticuloSoap InsertarArticulo(ArticuloInputSoap input)
@@ -26,7 +28,6 @@ namespace Inventory.ServiceHost.Soap
 
             try
             {
-                // Mapeo: SOAP → DTO
                 var dto = new ArticuloDto
                 {
                     Codigo       = input.Codigo ?? string.Empty,
@@ -56,12 +57,10 @@ namespace Inventory.ServiceHost.Soap
             }
             catch (DomainException ex)
             {
-                // Error de validación de negocio (regla incumplida, datos inválidos)
                 throw Fault(ex.Message);
             }
             catch (Exception ex)
             {
-                // Error inesperado (DB, nulos, etc.)
                 Console.WriteLine($"[SOAP ERROR] {ex}");
                 throw Fault("Error interno en el servidor.");
             }
@@ -104,6 +103,48 @@ namespace Inventory.ServiceHost.Soap
                     StockMin     = a.StockMin
                 })
                 .ToList();
+        }
+
+        public void ActualizarArticulo(string codigo, ArticuloInputSoap input)
+        {
+            var dto = new ArticuloDto
+            {
+                Codigo = codigo,
+                Nombre = input.Nombre,
+                CategoriaId = input.CategoriaId,
+                ProveedorId = input.ProveedorId,
+                PrecioCompra = input.PrecioCompra,
+                PrecioVenta = input.PrecioVenta,
+                Stock = input.Stock,
+                StockMin = input.StockMin
+            };
+
+            _svc.ActualizarAsync(codigo, dto).GetAwaiter().GetResult();
+        }
+
+        public void EliminarArticulo(string codigo)
+        {
+            var art = _repo.GetByCodigoAsync(codigo).GetAwaiter().GetResult()
+                ?? throw new FaultException($"El artículo con código '{codigo}' no existe.");
+
+            _repo.DeleteAsync(art.Id).GetAwaiter().GetResult();
+        }
+
+        public IEnumerable<ArticuloSoap> BuscarArticulos(string? codigo, string? nombre)
+        {
+            var articulos = _svc.BuscarAsync(codigo, nombre).GetAwaiter().GetResult();
+            return articulos.Select(a => new ArticuloSoap
+            {
+                Id = a.Id,
+                Codigo = a.Codigo,
+                Nombre = a.Nombre,
+                CategoriaId = a.CategoriaId,
+                ProveedorId = a.ProveedorId,
+                PrecioCompra = a.PrecioCompra,
+                PrecioVenta = a.PrecioVenta,
+                Stock = a.Stock,
+                StockMin = a.StockMin
+            }).ToList();
         }
 
         private static FaultException Fault(string message) =>

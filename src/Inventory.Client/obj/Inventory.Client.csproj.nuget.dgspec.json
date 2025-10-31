@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\ESPE\\APLICACION DISTRIBUIDAS\\SOA\\inventory-ncapas\\src\\Inventory.Client\\Inventory.Client.csproj": {}
+    "D:\\Semestre 2025-2026\\Distri\\soaTarea\\soa_arias_ramos\\src\\Inventory.Client\\Inventory.Client.csproj": {}
   },
   "projects": {
-    "D:\\ESPE\\APLICACION DISTRIBUIDAS\\SOA\\inventory-ncapas\\src\\Inventory.Client\\Inventory.Client.csproj": {
+    "D:\\Semestre 2025-2026\\Distri\\soaTarea\\soa_arias_ramos\\src\\Inventory.Client\\Inventory.Client.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ESPE\\APLICACION DISTRIBUIDAS\\SOA\\inventory-ncapas\\src\\Inventory.Client\\Inventory.Client.csproj",
+        "projectUniqueName": "D:\\Semestre 2025-2026\\Distri\\soaTarea\\soa_arias_ramos\\src\\Inventory.Client\\Inventory.Client.csproj",
         "projectName": "Inventory.Client",
-        "projectPath": "D:\\ESPE\\APLICACION DISTRIBUIDAS\\SOA\\inventory-ncapas\\src\\Inventory.Client\\Inventory.Client.csproj",
-        "packagesPath": "C:\\Users\\bigtu\\.nuget\\packages\\",
-        "outputPath": "D:\\ESPE\\APLICACION DISTRIBUIDAS\\SOA\\inventory-ncapas\\src\\Inventory.Client\\obj\\",
+        "projectPath": "D:\\Semestre 2025-2026\\Distri\\soaTarea\\soa_arias_ramos\\src\\Inventory.Client\\Inventory.Client.csproj",
+        "packagesPath": "C:\\Users\\yisus\\.nuget\\packages\\",
+        "outputPath": "D:\\Semestre 2025-2026\\Distri\\soaTarea\\soa_arias_ramos\\src\\Inventory.Client\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\bigtu\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\yisus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -26,8 +30,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\ESPE\\APLICACION DISTRIBUIDAS\\SOA\\inventory-ncapas\\src\\Inventory.Domain\\Inventory.Domain.csproj": {
-                "projectPath": "D:\\ESPE\\APLICACION DISTRIBUIDAS\\SOA\\inventory-ncapas\\src\\Inventory.Domain\\Inventory.Domain.csproj"
+              "D:\\Semestre 2025-2026\\Distri\\soaTarea\\soa_arias_ramos\\src\\Inventory.Domain\\Inventory.Domain.csproj": {
+                "projectPath": "D:\\Semestre 2025-2026\\Distri\\soaTarea\\soa_arias_ramos\\src\\Inventory.Domain\\Inventory.Domain.csproj"
               }
             }
           }
@@ -41,7 +45,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -62,21 +67,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.415/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\ESPE\\APLICACION DISTRIBUIDAS\\SOA\\inventory-ncapas\\src\\Inventory.Domain\\Inventory.Domain.csproj": {
+    "D:\\Semestre 2025-2026\\Distri\\soaTarea\\soa_arias_ramos\\src\\Inventory.Domain\\Inventory.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ESPE\\APLICACION DISTRIBUIDAS\\SOA\\inventory-ncapas\\src\\Inventory.Domain\\Inventory.Domain.csproj",
+        "projectUniqueName": "D:\\Semestre 2025-2026\\Distri\\soaTarea\\soa_arias_ramos\\src\\Inventory.Domain\\Inventory.Domain.csproj",
         "projectName": "Inventory.Domain",
-        "projectPath": "D:\\ESPE\\APLICACION DISTRIBUIDAS\\SOA\\inventory-ncapas\\src\\Inventory.Domain\\Inventory.Domain.csproj",
-        "packagesPath": "C:\\Users\\bigtu\\.nuget\\packages\\",
-        "outputPath": "D:\\ESPE\\APLICACION DISTRIBUIDAS\\SOA\\inventory-ncapas\\src\\Inventory.Domain\\obj\\",
+        "projectPath": "D:\\Semestre 2025-2026\\Distri\\soaTarea\\soa_arias_ramos\\src\\Inventory.Domain\\Inventory.Domain.csproj",
+        "packagesPath": "C:\\Users\\yisus\\.nuget\\packages\\",
+        "outputPath": "D:\\Semestre 2025-2026\\Distri\\soaTarea\\soa_arias_ramos\\src\\Inventory.Domain\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\bigtu\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\yisus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -99,7 +108,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -130,7 +140,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.415/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

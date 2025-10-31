@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.ServiceModel;
+using System.Threading.Tasks;
 
 namespace Inventory.Domain.Soap
 {
@@ -22,6 +23,24 @@ namespace Inventory.Domain.Soap
             Action = "http://tempuri.org/IInventarioSoap/ListarArticulos",
             ReplyAction = "*")]
         IEnumerable<ArticuloSoap> ListarArticulos(int limit);
+
+        // NUEVO: actualizar artículo
+        [OperationContract(
+            Action = "http://tempuri.org/IInventarioSoap/ActualizarArticulo",
+            ReplyAction = "*")]
+        void ActualizarArticulo(string codigo, ArticuloInputSoap input);
+
+        // NUEVO: eliminar artículo
+        [OperationContract(
+            Action = "http://tempuri.org/IInventarioSoap/EliminarArticulo",
+            ReplyAction = "*")]
+        void EliminarArticulo(string codigo);
+
+        // NUEVO: buscar artículos
+        [OperationContract(
+            Action = "http://tempuri.org/IInventarioSoap/BuscarArticulos",
+            ReplyAction = "*")]
+        IEnumerable<ArticuloSoap> BuscarArticulos(string? codigo, string? nombre);
     }
 
     // ======== Clases de datos ========

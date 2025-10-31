@@ -8,13 +8,10 @@ namespace Inventory.Domain.Contracts
     {
         Task<int> InsertAsync(Articulo entidad);
         Task<int> UpdateAsync(Articulo entidad);
+        Task DeleteAsync(int id);
 
         Task<Articulo?> GetByCodigoAsync(string codigo);
 
-        // Usado por el listado rápido en SOAP:
         Task<IEnumerable<Articulo>> SearchAsync(string? codigo, string? nombre);
-
-        // Si prefieres, puedes tener también:
-        // Task<IEnumerable<Articulo>> GetAllAsync();
     }
 }

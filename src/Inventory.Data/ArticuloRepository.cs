@@ -54,15 +54,15 @@ UPDATE articulo
         public async Task<Articulo?> GetByCodigoAsync(string codigo)
         {
             const string sql = @"
-SELECT id, codigo, nombre, categoria_id, proveedor_id,
-       precio_compra, precio_venta, stock, stock_min
-  FROM articulo
- WHERE codigo = @Codigo
- LIMIT 1;";
+        SELECT id, codigo, nombre, categoria_id, proveedor_id,
+            precio_compra, precio_venta, stock, stock_min
+        FROM articulo
+        WHERE TRIM(UPPER(codigo)) = TRIM(UPPER(@Codigo))
+        LIMIT 1;";
+            
             using var conn = CreateConn();
             return await conn.QueryFirstOrDefaultAsync<Articulo>(sql, new { Codigo = codigo });
         }
-
         public async Task<IEnumerable<Articulo>> SearchAsync(string? codigo, string? nombre)
         {
             const string sql = @"
@@ -85,5 +85,13 @@ SELECT id, codigo, nombre, categoria_id, proveedor_id,
         //     using var conn = CreateConn();
         //     return await conn.QueryAsync<Articulo>(sql);
         // }
+
+        // En ArticuloRepository.cs
+        public async Task DeleteAsync(int id)
+        {
+            const string sql = "DELETE FROM articulo WHERE id = @Id;";
+            using var conn = CreateConn();
+            await conn.ExecuteAsync(sql, new { Id = id });
+        }
     }
 }

@@ -1,11 +1,1 @@
-{
-  "Version": 1,
-  "Hash": "qSBDKa59gm0y87TQKoGBNUzp9RiLkKc7nV/BvIs3yu4=",
-  "Source": "Inventory.SOAP",
-  "BasePath": "_content/Inventory.SOAP",
-  "Mode": "Default",
-  "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
-}
+{"Version":1,"Hash":"90zfUdu26DTs0caFfzLoMY2+AE8rCo/Ize0pEbW1mHU=","Source":"Inventory.SOAP","BasePath":"_content/Inventory.SOAP","Mode":"Default","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}
